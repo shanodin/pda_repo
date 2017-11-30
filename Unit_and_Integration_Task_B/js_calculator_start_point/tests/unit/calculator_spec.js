@@ -43,12 +43,29 @@ describe('calculator', function () {
 
   it('should use multiple operator clicks', function () {
     calculator.numberClick(2)
-    calculator.operatorClick("*")
+    calculator.operatorClick('*')
     calculator.numberClick(2)
-    calculator.operatorClick("-")
+    calculator.operatorClick('-')
     calculator.numberClick(1)
-    calculator.operatorClick("=")
+    calculator.operatorClick('=')
     assert.equal(calculator.runningTotal, 3)
+  }),
+
+
+  it('should clear the total', function () {
+    calculator.numberClick(2)
+    calculator.numberClick(2)
+    calculator.clearClick()
+    assert.equal(calculator.runningTotal, 0)
+  }),
+
+  it('should clear a number but not the total', function () {
+    calculator.numberClick(4)
+    calculator.operatorClick('+')
+    calculator.numberClick(4)
+    calculator.clearClick()
+    calculator.operatorClick('=')    
+    assert.equal(calculator.runningTotal, 4)
   })
 
 })
